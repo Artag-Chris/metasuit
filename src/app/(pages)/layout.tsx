@@ -1,19 +1,18 @@
-
-import Navbar from "@/components/navbar/Navbar"
-import Sidebar from "@/components/sidebar/Sidebar"
-
+import Navbar from "@/components/navbar/Navbar";
+import React, { Suspense } from "react";
+const Sidebar = React.lazy(() => import("@/components/sidebar/Sidebar"));
 
 export default function PublicLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <Navbar />
-            <Sidebar children={children} />
-            
-        </>
-    )
-        
+  return (
+    <>
+      <Navbar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Sidebar children={children} />
+      </Suspense>
+    </>
+  );
 }
