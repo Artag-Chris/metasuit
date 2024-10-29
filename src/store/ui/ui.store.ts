@@ -7,7 +7,7 @@ interface State{
     changeFuente:(fuente:string)=>void
 }
 
-const useUIStore = create<State>()((set) => ({
+export const useUIStore = create<State>()((set) => ({
     color:'black',
     fuente:'geist',
 
