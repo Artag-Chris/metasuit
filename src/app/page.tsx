@@ -1,6 +1,5 @@
-"use client";
+'use client'
 import { useUIStore } from "@/store";
-
 
 export default function Home() {
   const { 
@@ -26,8 +25,6 @@ export default function Home() {
         Toggle Dark Mode
       </button>
       {/* Otros elementos de UI */}
-
-     <h1>Geist</h1>
     </div>
   );
 }
