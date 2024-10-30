@@ -1,11 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-
-
-
 import { MessageCircle, RefreshCw } from "lucide-react";
-
 import { User } from "@/app/domain/interfaces/userInterface";
-
 import { numberParser } from "@/app/domain/functions/numberParser";
 import { useWhatsappData } from "@/hooks/useWhatsappData";
 
