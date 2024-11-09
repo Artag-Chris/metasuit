@@ -1,30 +1,38 @@
 'use client'
-import { useUIStore } from "@/store";
+import { useEffect } from "react";
+import { useUIStore } from "../store";
 
 export default function Home() {
   const { 
-    isDarkMode, 
-    colorScheme, 
-    borderRadius, 
-    modalOpacity, 
-    font, 
-    toggleDarkMode, 
-    setColorScheme, 
-    setBorderRadius, 
-    setModalOpacity, 
-    setFont 
+   theme,turnBlue
   } = useUIStore()
+
+  const handleClick = () => {
+   turnBlue('red')
+  };
+
+  useEffect(() => {
+    useUIStore .persist.rehydrate()
+  }, [])
+
   return (
-    <div style={{ 
-      backgroundColor: colorScheme.background, 
-      color: colorScheme.text,
-      borderRadius: borderRadius === 'rounded' ? '10px' : '0',
-      fontFamily: font
-    }}>
-      <button onClick={toggleDarkMode}>
-        Toggle Dark Mode
+
+    <div style={{backgroundColor:theme.backgroundColor}}>
+      <h1>hello</h1>
+
+      <button
+        style={{
+          backgroundColor: 'blue',
+          color: 'white',
+          padding: '10px 20px',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+        onClick={handleClick}
+      >
+        Clickeame!
       </button>
-      {/* Otros elementos de UI */}
     </div>
+
   );
 }
