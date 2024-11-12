@@ -74,21 +74,21 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-// This is sample data.
+// data dummy para test
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Artag",
+    email: "Scristxyz@gmail.com",
+    avatar: "https://avatars.githubusercontent.com/u/74101396?s=400&u=3ac687f6a04e397b331f176ee3aca16a0227abf4&v=4",
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Finova",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      plan: "Startup",
     },
     {
-      name: "Acme Corp.",
+      name: "Solucredito",
       logo: AudioWaveform,
       plan: "Startup",
     },
@@ -100,69 +100,67 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Hub Empresarial",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Chats de Whatsapp",
+          url: "http://localhost:3000/whatsapp/chat",
+        },
+        {
+          title: "Plantillas de Whatsapp",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Chats de instagram",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "Publicaciones de instagram",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Modelos de IA",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
+          title: "Imagen Verificada por IA",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Asistente Personal",
           url: "#",
         },
-        {
-          title: "Quantum",
-          url: "#",
-        },
+       
       ],
     },
     {
-      title: "Documentation",
+      title: "Documentacion",
       url: "#",
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
+          title: "Introduccion",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Servicios",
           url: "#",
         },
         {
-          title: "Tutorials",
+          title: "Tutoriales",
           url: "#",
         },
-        {
-          title: "Changelog",
-          url: "#",
-        },
+        
       ],
     },
     {
-      title: "Settings",
+      title: "Configuraciones",
       url: "#",
       icon: Settings2,
       items: [
@@ -171,15 +169,15 @@ const data = {
           url: "#",
         },
         {
-          title: "Team",
+          title: "Temas",
           url: "#",
         },
         {
-          title: "Billing",
+          title: "Facturacion",
           url: "#",
         },
         {
-          title: "Limits",
+          title: "Limites",
           url: "#",
         },
       ],
@@ -187,20 +185,16 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Ingeniería de Diseño",
       url: "#",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
+      name: "Ventas & Marketing",
       url: "#",
       icon: PieChart,
     },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+    
   ],
 }
 
@@ -244,7 +238,7 @@ export default function Page({
                   sideOffset={4}
                 >
                   <DropdownMenuLabel className="text-xs text-muted-foreground">
-                    Teams
+                    Empresas
                   </DropdownMenuLabel>
                   {data.teams.map((team, index) => (
                     <DropdownMenuItem
@@ -265,7 +259,7 @@ export default function Page({
                       <Plus className="size-4" />
                     </div>
                     <div className="font-medium text-muted-foreground">
-                      Add team
+                      Agrega empresa
                     </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -353,7 +347,7 @@ export default function Page({
               <SidebarMenuItem>
                 <SidebarMenuButton className="text-sidebar-foreground/70">
                   <MoreHorizontal className="text-sidebar-foreground/70" />
-                  <span>More</span>
+                  <span>Mas</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -400,7 +394,7 @@ export default function Page({
                           alt={data.user.name}
                         />
                         <AvatarFallback className="rounded-lg">
-                          CN
+                          BOB
                         </AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
@@ -417,22 +411,22 @@ export default function Page({
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <Sparkles />
-                      Upgrade to Pro
+                      Perfil
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <BadgeCheck />
-                      Account
+                      Cuentas
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <CreditCard />
-                      Billing
+                      Pagos
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Bell />
-                      Notifications
+                      Notificaciones
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
