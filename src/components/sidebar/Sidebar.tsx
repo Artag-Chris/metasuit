@@ -132,11 +132,11 @@ const data = {
       items: [
         {
           title: "Imagen Verificada por IA",
-          url: "#",
+          url: "http://localhost:3000/IA/image",
         },
         {
           title: "Asistente Personal",
-          url: "#",
+          url: "http://localhost:3000/IA/assist",
         },
        
       ],
