@@ -101,7 +101,7 @@ const WhatsappMessagesComponent: React.FC<WhatsappMessagesComponentProps> = ({
                 }}
                 onClick={() => handleClick(item)}
               >
-                <div style={{
+                <div style={{ 
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
