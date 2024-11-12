@@ -74,6 +74,8 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { useThemeStore } from '@/store/ui/ThemeConfiguration'
+
 // data dummy para test
 const data = {
   user: {
@@ -170,7 +172,7 @@ const data = {
         },
         {
           title: "Temas",
-          url: "#",
+          url: "http://localhost:3000/config",
         },
         {
           title: "Facturacion",
@@ -204,10 +206,26 @@ export default function Page({
     children: React.ReactNode
 }) {
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0])
+  const { themes, currentThemeId } = useThemeStore()
+  const currentTheme = themes.find(theme => theme.id === currentThemeId) || themes[0]
+
+  const sidebarStyle = {
+    backgroundColor: currentTheme.background,
+    color: currentTheme.text,
+    fontFamily: currentTheme.fontFamily,
+    fontSize: `${currentTheme.fontSize.medium}px`,
+    '--sidebar-border-radius': `${currentTheme.borderRadius}px`,
+  } as React.CSSProperties
+
+  const buttonStyle = {
+    backgroundColor: currentTheme.primary,
+    color: currentTheme.background,
+    borderRadius: `${currentTheme.borderRadius}px`,
+  }
 
   return (
     <SidebarProvider>
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" style={sidebarStyle}>
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -216,6 +234,7 @@ export default function Page({
                   <SidebarMenuButton
                     size="lg"
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                    style={buttonStyle}
                   >
                     <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                       <activeTeam.logo className="size-4" />
@@ -236,6 +255,11 @@ export default function Page({
                   align="start"
                   side="bottom"
                   sideOffset={4}
+                  style={{
+                    backgroundColor: currentTheme.background,
+                    color: currentTheme.text,
+                    borderRadius: `${currentTheme.borderRadius}px`,
+                  }}
                 >
                   <DropdownMenuLabel className="text-xs text-muted-foreground">
                     Empresas
@@ -280,7 +304,7 @@ export default function Page({
                 >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title}>
+                      <SidebarMenuButton tooltip={item.title} style={buttonStyle}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -290,7 +314,7 @@ export default function Page({
                       <SidebarMenuSub>
                         {item.items?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild>
+                            <SidebarMenuSubButton asChild style={buttonStyle}>
                               <a href={subItem.url}>
                                 <span>{subItem.title}</span>
                               </a>
@@ -309,7 +333,7 @@ export default function Page({
             <SidebarMenu>
               {data.projects.map((item) => (
                 <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild style={buttonStyle}>
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.name}</span>
@@ -326,6 +350,11 @@ export default function Page({
                       className="w-48 rounded-lg"
                       side="bottom"
                       align="end"
+                      style={{
+                        backgroundColor: currentTheme.background,
+                        color: currentTheme.text,
+                        borderRadius: `${currentTheme.borderRadius}px`,
+                      }}
                     >
                       <DropdownMenuItem>
                         <Folder className="text-muted-foreground" />
@@ -345,7 +374,7 @@ export default function Page({
                 </SidebarMenuItem>
               ))}
               <SidebarMenuItem>
-                <SidebarMenuButton className="text-sidebar-foreground/70">
+                <SidebarMenuButton className="text-sidebar-foreground/70" style={buttonStyle}>
                   <MoreHorizontal className="text-sidebar-foreground/70" />
                   <span>Mas</span>
                 </SidebarMenuButton>
@@ -361,6 +390,7 @@ export default function Page({
                   <SidebarMenuButton
                     size="lg"
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                    style={buttonStyle}
                   >
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage
@@ -385,6 +415,11 @@ export default function Page({
                   side="bottom"
                   align="end"
                   sideOffset={4}
+                  style={{
+                    backgroundColor: currentTheme.background,
+                    color: currentTheme.text,
+                    borderRadius: `${currentTheme.borderRadius}px`,
+                  }}
                 >
                   <DropdownMenuLabel className="p-0 font-normal">
                     <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
@@ -442,7 +477,10 @@ export default function Page({
         <SidebarRail />
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12" style={{
+          backgroundColor: currentTheme.background,
+          color: currentTheme.text,
+        }}>
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -461,7 +499,10 @@ export default function Page({
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0" style={{
+          backgroundColor: currentTheme.background,
+          color: currentTheme.text,
+        }}>
           {children}
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>

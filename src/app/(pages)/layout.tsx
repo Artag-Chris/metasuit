@@ -1,6 +1,14 @@
+
 import Navbar from "@/components/navbar/Navbar";
 import React, { Suspense } from "react";
-const Sidebar = React.lazy(() => import("@/components/sidebar/Sidebar"));
+import dynamic from 'next/dynamic';
+
+
+// Componente cliente para el Sidebar
+const ClientSidebar = dynamic(() => import("@/components/sidebar/ClientSidebar"), {
+
+  loading: () => <div></div>
+});
 
 export default function PublicLayout({
   children,
@@ -10,8 +18,8 @@ export default function PublicLayout({
   return (
     <>
       <Navbar />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Sidebar children={children} />
+      <Suspense fallback={<div>aqui</div>}>
+      <ClientSidebar>{children}</ClientSidebar>
       </Suspense>
     </>
   );

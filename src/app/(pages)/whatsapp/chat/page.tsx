@@ -25,7 +25,7 @@ function Chat() {
         <h1 className="text-2xl font-bold text-purple-600 mb-4">Chat</h1>
 
         <div className="h-full overflow-y-auto">
-          <h1> aqui hira el nuevo chat</h1>
+          <h1 className="text-2xl font-bold text-purple-600 mb-4"> aqui hira el nuevo chat</h1>
         </div>
       </div>
     </div>
