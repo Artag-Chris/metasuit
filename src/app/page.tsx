@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { signIn, useSession } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 
 
 export default function LoginPage() {
@@ -13,7 +13,12 @@ export default function LoginPage() {
    {session ? (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl font-bold text-center text-gray-900">Bienvenido {session.user?.name ? session.user.name :"pepe"}</h1>
-      <Link href="/dashboard" className="text-2xl font-bold text-center text-gray-900">Ir a Dashboard</Link>
+      <Link href="/http://localhost:3000/whatsapp/chat" className="text-2xl font-bold text-center text-gray-900">Ir a inicio</Link>
+      <button className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300"
+      onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
+      >
+        Sign out
+      </button>
     </div>
    ) : (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
