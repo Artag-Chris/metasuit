@@ -69,10 +69,100 @@ const darkTheme: Theme = {
   primary: '#61dafb',
 }
 
+const neonTheme: Theme = {
+  ...defaultTheme,
+  id: 'neon',
+  name: 'Neon',
+  primary: '#00ff00',
+  secondary: '#ff00ff',
+  background: '#000000',
+  text: '#ffffff',
+  borderRadius: 8,
+  fontFamily: '"Orbitron", sans-serif',
+}
+
+const luxuryTheme: Theme = {
+  ...defaultTheme,
+  id: 'luxury',
+  name: 'Luxury',
+  primary: '#d4af37',
+  secondary: '#c0c0c0',
+  background: '#000000',
+  text: '#ffffff',
+  borderRadius: 0,
+  fontFamily: '"Playfair Display", serif',
+}
+
+const cokeTheme: Theme = {
+  ...defaultTheme,
+  id: 'coke',
+  name: 'Coca-Cola',
+  primary: '#f40009',
+  secondary: '#1e1e1e',
+  background: '#ffffff',
+  text: '#1e1e1e',
+  borderRadius: 12,
+  fontFamily: '"Gotham", sans-serif',
+}
+
+const programmerTheme: Theme = {
+  ...defaultTheme,
+  id: 'programmer',
+  name: 'Programmer',
+  primary: '#61afef',
+  secondary: '#98c379',
+  background: '#282c34',
+  text: '#abb2bf',
+  borderRadius: 2,
+  fontFamily: '"Fira Code", monospace',
+}
+
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      themes: [defaultTheme, lightTheme, darkTheme],
+      themes: [
+        defaultTheme,
+        lightTheme,
+        darkTheme,
+        neonTheme,
+        luxuryTheme,
+        cokeTheme,
+        programmerTheme,
+        {
+          ...defaultTheme,
+          id: 'serif',
+          name: 'Serif',
+          fontFamily: '"Georgia", serif',
+        },
+        {
+          ...defaultTheme,
+          id: 'sans-serif',
+          name: 'Sans Serif',
+          fontFamily: '"Helvetica Neue", sans-serif',
+        },
+        {
+          ...defaultTheme,
+          id: 'italic-serif',
+          name: 'Italic Serif',
+          fontFamily: '"Baskerville", serif',
+          fontSize: {
+            small: 14,
+            medium: 18,
+            large: 24,
+          },
+        },
+        {
+          ...defaultTheme,
+          id: 'italic-sans',
+          name: 'Italic Sans',
+          fontFamily: '"Gill Sans", sans-serif',
+          fontSize: {
+            small: 14,
+            medium: 18,
+            large: 24,
+          },
+        },
+      ],
       currentThemeId: 'default',
       addTheme: (theme) => set((state) => ({ themes: [...state.themes, theme] })),
       updateTheme: (id, newTheme) => set((state) => ({
