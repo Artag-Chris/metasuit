@@ -1,85 +1,147 @@
 "use client"
+
+import React, { useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { signIn, signOut, useSession } from "next-auth/react"
-
+import { useThemeStore } from '@/store/ui/ThemeConfiguration'
 
 export default function LoginPage() {
-  const {data:session} = useSession()
-  return (
-   <>
-   {session ? (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold text-center text-gray-900">Bienvenido {session.user?.name ? session.user.name :"pepe"}</h1>
-      <Link href="/whatsapp/chat" className="text-2xl font-bold text-center text-gray-900">Ir a inicio</Link>
-      <button className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300"
-      onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
-      >
-        Sign out
-      </button>
-    </div>
-   ) : (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-    <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-2xl">
-      <h1 className="text-3xl font-bold text-center text-gray-900">Iniciar Sesión</h1>
-      <form className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-            Correo Electrónico
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="tu@email.com"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-            required
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="password" className="text-sm font-medium text-gray-700">
-            Contraseña
-          </Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-            required
-          />
-        </div>
-        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
-        
-        >
-          Iniciar Sesión
-        </Button>
-      </form>
-      <p className="text-center text-sm text-gray-600">
-        ¿No tienes una cuenta?{" "}
-        <Link href="/register" className="font-medium text-purple-600 hover:text-purple-500">
-          Regístrate
-        </Link>
-      </p>
-      <button className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300"
-      onClick={() => signIn('google')}
-      >
-        Iniciar Sesión con Google
-      </button>
-      <button className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300"
-      onClick={() => signIn('facebook')}
-      >
-        Iniciar Sesión con Facebook
-      </button>
-      <button className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300"
-      onClick={() => signIn('github')}
-      >
-        Iniciar Sesión con GitHub
-      </button>
-    </div>
-  </div>
-   )}     
+  const { data: session } = useSession()
+  const { themes, currentThemeId, checkAndUpdateVersion } = useThemeStore()
+  const currentTheme = themes.find(theme => theme.id === currentThemeId) || themes[0]
 
-   </>
+  useEffect(() => {
+    checkAndUpdateVersion()
+  }, [checkAndUpdateVersion])
+
+  const containerStyle: React.CSSProperties = {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: `linear-gradient(to right, ${currentTheme.primary}, ${currentTheme.secondary})`,
+    fontFamily: currentTheme.fontFamily,
+  }
+
+  const cardStyle: React.CSSProperties = {
+    width: '100%',
+    maxWidth: '24rem',
+    padding: `${currentTheme.spacing.large}px`,
+    backgroundColor: currentTheme.background,
+    borderRadius: `${currentTheme.borderRadius}px`,
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+  }
+
+  const headingStyle: React.CSSProperties = {
+    fontSize: `${currentTheme.fontSize.large}px`,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: currentTheme.text,
+    marginBottom: `${currentTheme.spacing.medium}px`,
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: `${currentTheme.spacing.small}px`,
+    border: `1px solid ${currentTheme.text}`,
+    borderRadius: `${currentTheme.borderRadius}px`,
+    marginBottom: `${currentTheme.spacing.small}px`,
+  }
+
+  const buttonStyle: React.CSSProperties = {
+    width: '100%',
+    padding: `${currentTheme.spacing.small}px`,
+    backgroundColor: currentTheme.primary,
+    color: currentTheme.background,
+    border: 'none',
+    borderRadius: `${currentTheme.borderRadius}px`,
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  }
+
+  const linkStyle: React.CSSProperties = {
+    color: currentTheme.primary,
+    textDecoration: 'none',
+    fontWeight: 'bold',
+  }
+
+  return (
+    <div style={containerStyle}>
+      {session ? (
+        <div style={cardStyle}>
+          <h1 style={headingStyle}>Bienvenido {session.user?.name || "Usuario"}</h1>
+          <Link href="/whatsapp/chat" style={{...linkStyle, display: 'block', textAlign: 'center', marginBottom: `${currentTheme.spacing.medium}px`}}>
+            Ir a inicio
+          </Link>
+          <button
+            style={buttonStyle}
+            onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
+          >
+            Cerrar sesión
+          </button>
+        </div>
+      ) : (
+        <div style={cardStyle}>
+          <h1 style={headingStyle}>Iniciar Sesión</h1>
+          <form>
+            <div style={{marginBottom: `${currentTheme.spacing.medium}px`}}>
+              <Label htmlFor="email" style={{color: currentTheme.text, fontSize: `${currentTheme.fontSize.small}px`}}>
+                Correo Electrónico
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="tu@email.com"
+                style={inputStyle}
+                required
+              />
+            </div>
+            <div style={{marginBottom: `${currentTheme.spacing.medium}px`}}>
+              <Label htmlFor="password" style={{color: currentTheme.text, fontSize: `${currentTheme.fontSize.small}px`}}>
+                Contraseña
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                style={inputStyle}
+                required
+              />
+            </div>
+            <Button type="submit" style={buttonStyle}>
+              Iniciar Sesión
+            </Button>
+          </form>
+          <p style={{textAlign: 'center', fontSize: `${currentTheme.fontSize.small}px`, color: currentTheme.text, margin: `${currentTheme.spacing.medium}px 0`}}>
+            ¿No tienes una cuenta?{" "}
+            <Link href="/register" style={linkStyle}>
+              Regístrate
+            </Link>
+          </p>
+          <button
+            style={{...buttonStyle, backgroundColor: currentTheme.secondary, marginBottom: `${currentTheme.spacing.small}px`}}
+            onClick={() => signIn('google')}
+          >
+            Iniciar Sesión con Google
+          </button>
+          <button
+            style={{...buttonStyle, backgroundColor: currentTheme.secondary, marginBottom: `${currentTheme.spacing.small}px`}}
+            onClick={() => signIn('facebook')}
+          >
+            Iniciar Sesión con Facebook
+          </button>
+          <button
+            style={{...buttonStyle, backgroundColor: currentTheme.secondary}}
+            onClick={() => signIn('github')}
+          >
+            Iniciar Sesión con GitHub
+          </button>
+        </div>
+      )}
+    </div>
   )
 }

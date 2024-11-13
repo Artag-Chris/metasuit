@@ -31,6 +31,13 @@ interface ThemeState {
   resetTheme: (id: string) => void;
 }
 
+interface VersionedThemeState extends ThemeState {
+  version: number;
+  checkAndUpdateVersion: () => void;
+}
+
+const CURRENT_VERSION = 1; // Increment this when you make changes to the themes
+
 const defaultTheme: Theme = {
   id: 'default',
   name: 'Default',
@@ -117,9 +124,9 @@ const programmerTheme: Theme = {
   fontFamily: '"Fira Code", monospace',
 }
 
-export const useThemeStore = create<ThemeState>()(
+export const useThemeStore = create<VersionedThemeState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       themes: [
         defaultTheme,
         lightTheme,
@@ -164,6 +171,7 @@ export const useThemeStore = create<ThemeState>()(
         },
       ],
       currentThemeId: 'default',
+      version: CURRENT_VERSION,
       addTheme: (theme) => set((state) => ({ themes: [...state.themes, theme] })),
       updateTheme: (id, newTheme) => set((state) => ({
         themes: state.themes.map((theme) => 
@@ -176,6 +184,60 @@ export const useThemeStore = create<ThemeState>()(
           theme.id === id ? (id === 'default' ? defaultTheme : theme) : theme
         ),
       })),
+      checkAndUpdateVersion: () => {
+        const state = get();
+        if (state.version < CURRENT_VERSION) {
+          set({
+            version: CURRENT_VERSION,
+            themes: [
+              defaultTheme,
+              lightTheme,
+              darkTheme,
+              neonTheme,
+              luxuryTheme,
+              cokeTheme,
+              programmerTheme,
+              {
+                ...defaultTheme,
+                id: 'serif',
+                name: 'Serif',
+                fontFamily: '"Georgia", serif',
+              },
+              {
+                ...defaultTheme,
+                id: 'sans-serif',
+                name: 'Sans Serif',
+                fontFamily: '"Helvetica Neue", sans-serif',
+              },
+              {
+                ...defaultTheme,
+                id: 'italic-serif',
+                name: 'Italic Serif',
+                fontFamily: '"Baskerville", serif',
+                fontSize: {
+                  small: 14,
+                  medium: 18,
+                  large: 24,
+                },
+              },
+              {
+                ...defaultTheme,
+                id: 'italic-sans',
+                name: 'Italic Sans',
+                fontFamily: '"Gill Sans", sans-serif',
+                fontSize: {
+                  small: 14,
+                  medium: 18,
+                  large: 24,
+                },
+              },
+            ],
+            currentThemeId: state.themes.some(t => t.id === state.currentThemeId) 
+              ? state.currentThemeId 
+              : 'default'
+          });
+        }
+      },
     }),
     {
       name: 'theme-storage',
