@@ -6,3 +6,4 @@ export * from "./DTOs/metaResponse.DTO";
 export * from "./config/envs";
 
 export * from "./interfaces/ImageTemplateReceived"
+export * from "./interfaces/BodyTemplateReceived"
