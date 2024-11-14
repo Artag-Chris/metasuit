@@ -6,6 +6,8 @@ export * from "../components/whatsapp/ChatWhatsappComponent"
 //componentes del chat de whatsapp
 export * from "../components/whatsappmessage/DocumentMessage"
 export * from "../components/whatsappmessage/ImageMessage"
+export * from "../components/whatsappmessage/VideoMessage"
+export * from "../components/whatsappmessage/VoiceMessage"
 
 
 //ui Chadcn

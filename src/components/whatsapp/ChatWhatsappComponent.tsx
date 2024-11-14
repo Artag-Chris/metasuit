@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mic, Paperclip, Send, UserCheck, X } from "lucide-react";
 import useSpecificData from "../../hooks/useSpecificUserData";
-
-import { removeBase64Prefix,ChatMessages,Conversation,User, WhatsappMessage, WhatsappStatus,botNumber, dispatchUser, documentResponse, fileMediaMeta, frontDocument, frontImage, frontMessage, frontVideo, imageResponse, metaToken, textResponse, url_base, videoResponse  } from "@/lib";
-
 import { format } from "date-fns/format";
+import { DocumentMessage,ImageMessage,VideoMessage, VoiceMessage } from "..";
+
+import { removeBase64Prefix,ChatMessages,Conversation,User, WhatsappMessage, WhatsappStatus,botNumber,
+  dispatchUser, documentResponse, fileMediaMeta, frontDocument, frontImage, frontMessage, frontVideo,
+  imageResponse, metaToken, textResponse, urlBase, videoResponse  } from "@/lib";
 
 
 
-
-import {  VideoMessage, VoiceMessage,} from "./chatcomponents";
-
-import TetrisLoader from "../loaders/TetrisLoader";
-import { DocumentMessage,ImageMessage } from "..";
 
 interface Props {
   user: any;
@@ -80,7 +77,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
   }, [isRecording]);
 
   useEffect(() => {
-    const ws = new WebSocket(`ws:${url_base}/ws`);
+    const ws = new WebSocket(`ws:${urlBase}/ws`);
 
     ws.onopen = () => {
       console.log("Conectado al servidor WebSocket");
@@ -101,7 +98,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
 
     const reconnectWebSocket = () => {
       setTimeout(() => {
-        const ws = new WebSocket(`ws:${url_base}/ws`);
+        const ws = new WebSocket(`ws:${urlBase}/ws`);
         ws.onopen = () => {
           console.log("Reconectado al servidor WebSocket");
         };
@@ -161,14 +158,14 @@ export default function ChatWhatsappComponent({ user }: Props) {
     setenvio(enviar);
     try {
       const [response, responseToSave] = await Promise.all([
-        fetch(textResponse, {
+        fetch(textResponse!, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ message: inputText, id: specificData.phone }),
         }),
-        fetch(frontMessage, {
+        fetch(frontMessage!, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -265,7 +262,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
           case "application/pdf":
             Promise.all([
               //guarda en la base de datos 
-              fetch(frontDocument, {
+              fetch(frontDocument!, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -276,7 +273,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
               }).catch((error) => {
                 console.error("Error en frontDocument:", error);
               }),
-              fetch(fileMediaMeta, {
+              fetch(fileMediaMeta!, {
                 //envia el formato a meta
                 method: "POST",
                 headers: {
@@ -292,7 +289,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
                 .catch((error) => {
                   console.error("Error en fileMediaMeta:", error);
                 }),
-              fetch(documentResponse, {
+              fetch(documentResponse!, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -318,7 +315,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
           case "image/png":
           case "image/gif":
             Promise.all([
-              fetch(frontImage, {
+              fetch(frontImage!, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -326,7 +323,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
                 body: JSON.stringify(sendToApi),
               }),
               fetch(
-                fileMediaMeta,
+                fileMediaMeta!,
                 {
                   method: "POST",
                   headers: {
@@ -341,7 +338,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
                 ).then(() => console.log("Media ID:", mediaId)
                 )
               ,
-              fetch(imageResponse, {
+              fetch(imageResponse!, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -361,7 +358,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
           case "video/quicktime":
           case "video/mpeg":
             Promise.all([
-              fetch(frontVideo, {
+              fetch(frontVideo!, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -369,7 +366,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
                 body: JSON.stringify(sendToApi),
               }),
               fetch(
-                fileMediaMeta,
+                fileMediaMeta!,
                 {
                   method: "POST",
                   headers: {
@@ -384,7 +381,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
                 ).then(() => console.log("Media ID:", mediaId)
                 )
               ,
-              fetch(videoResponse, {
+              fetch(videoResponse!, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -435,7 +432,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
 
   const handleDispatchClient = async () => {
     try {
-      const response = await fetch(dispatchUser, {
+      const response = await fetch(dispatchUser!, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -455,13 +452,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
       console.error('Error:', error);
     }
   };
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-full">
-        <TetrisLoader />
-      </div>
-    );
-  }
+  
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
