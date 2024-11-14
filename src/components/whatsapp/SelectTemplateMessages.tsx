@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Loader2, Send, FileSpreadsheet, ChevronDown, Search, X } from "lucide-react";
-import * as XLSX from "xlsx";
-import usePhoneNumbers from "../hook/usePhoneNumberToSend";
-import useTemplates from "../hook/useTemplates";
+import * as XLSX from "xlsx"; //usar un adaptador aqui para esto
+
+import usePhoneNumbers from "../../hooks/usePhoneNumberToSend";
+import useTemplates from "../../hooks/useTemplates";
+
 import { getVariableCount } from "../../lib";
-//import TetrisLoader from "../../loaders/TetrisLoader";
-import { sinVariableImagen, unaVariableImagen, dosVariableImagen, tresVariableImagen, cuatroVariableImagen, sinVariable, unaVariable, dosVariable, tresVariable, cuatroVariable, sinVariableDocument, cuatroVariableDocument, dosVariableDocument, tresVariableDocument, unaVariableDocument, cuatroVariableVideo, dosVariableVideo, sinVariableVideo, tresVariableVideo, unaVariableVideo } from "../config/envs";
+
+import { sinVariableImagen, unaVariableImagen, dosVariableImagen, tresVariableImagen,
+    cuatroVariableImagen, sinVariable, unaVariable, dosVariable, tresVariable, cuatroVariable,
+    sinVariableDocument, cuatroVariableDocument, dosVariableDocument, tresVariableDocument,
+    unaVariableDocument, cuatroVariableVideo, dosVariableVideo, sinVariableVideo, tresVariableVideo, 
+    unaVariableVideo } from "../../lib/config/envs";
 
 
 interface SendMessagesProps {

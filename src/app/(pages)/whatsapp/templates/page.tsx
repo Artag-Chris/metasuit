@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import SelectTemplateMessages from '../components/messagescomponents/SelectTemplate';
-import { SendMessagesTemplate } from '../components/messagescomponents/SendMessages';
+import { SendMessagesTemplate } from '@/components/whatsapp/SendMessagesTemplate';
+import SelectTemplateMessages from '@/components/whatsapp/SelectTemplateMessages';
 
 
 export default function TemplatesPage() {
