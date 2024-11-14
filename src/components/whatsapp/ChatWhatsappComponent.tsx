@@ -57,6 +57,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
         return new Date(timestampA).getTime() - new Date(timestampB).getTime();
       });
       setMessages(sortedMessages);
+      //no es necesario hacer esto no se si borrarlo
       setLoading(false);
     };
     loadMessages();
@@ -132,6 +133,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
     }
     const array: WhatsappMessage[] = [
       {
+        //podriamos usar uuid
         id:
           Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15),
@@ -185,6 +187,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
     }
   };
 
+  //cambiar a la funcion para ahorrar espacio
   const fileToBlob = (file: File): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -222,6 +225,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
         formData.append("file", blob);
         formData.append("type", file.type);
 
+        //quitar los tipo any
         const newMessage: any = {
           id: `${(messages?.length + 1).toString()}`,
           type: file.type,
@@ -234,6 +238,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
           status: "unread",
           mediaId: "",
         };
+        //quitar los tipo any
         const sendToApi: any = {
           id:
             Math.random().toString(36).substring(2, 15) +
@@ -407,7 +412,7 @@ export default function ChatWhatsappComponent({ user }: Props) {
       reader.readAsDataURL(file);
     }
   };
-
+//cambiar esto por una funcion aparte
   const handleVoiceRecording = () => {
     if (isRecording) {
       const newMessage: ChatMessages = {
