@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mic, Paperclip, Send, UserCheck, X } from "lucide-react";
 import useSpecificData from "../../hooks/useSpecificUserData";
-import { Conversation } from "./class/Conversation";
+
+import { removeBase64Prefix,ChatMessages,Conversation,User, WhatsappMessage, WhatsappStatus,botNumber, dispatchUser, documentResponse, fileMediaMeta, frontDocument, frontImage, frontMessage, frontVideo, imageResponse, metaToken, textResponse, url_base, videoResponse  } from "@/lib";
+
 import { format } from "date-fns/format";
-import { ChatMessages } from "./interfaces/mergedDataMessages";
-import { User, WhatsappMessage, WhatsappStatus } from "./interfaces";
-import { removeBase64Prefix } from "./functions/removeBase64Prefix";
-import { ImageMessage, VideoMessage, VoiceMessage, DocumentMessage } from "./chatcomponents";
-import { botNumber, dispatchUser, documentResponse, fileMediaMeta, frontDocument, frontImage, frontMessage, frontVideo, imageResponse, metaToken, textResponse, url_base, videoResponse } from "./config/envs";
+
+
+
+
+import {  VideoMessage, VoiceMessage,} from "./chatcomponents";
+
 import TetrisLoader from "../loaders/TetrisLoader";
+import { DocumentMessage,ImageMessage } from "..";
 
 interface Props {
   user: any;

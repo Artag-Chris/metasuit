@@ -3,6 +3,9 @@ export * from "../components/whatsapp/WhatsappMessageComponent";
 export * from "../components/whatsapp/SelectTemplateMessages";
 export * from "../components/whatsapp/SendMessages";
 export * from "../components/whatsapp/ChatWhatsappComponent"
+//componentes del chat de whatsapp
+export * from "../components/whatsappmessage/DocumentMessage"
+export * from "../components/whatsappmessage/ImageMessage"
 
 
 //ui Chadcn
