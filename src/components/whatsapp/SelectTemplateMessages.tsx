@@ -25,7 +25,7 @@ interface SendMessagesProps {
   videoUrl?: string
 }
 
-export default function SendMessages({
+export default function SelectTemplateMessages({
   setSelectedTemplate,
   selectedTemplate,
   setIsExcelFileLoaded,

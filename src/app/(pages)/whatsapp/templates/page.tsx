@@ -1,5 +1,6 @@
+"use client";
 import { useState } from 'react';
-import { SendMessagesTemplate } from '@/components/whatsapp/SendMessagesTemplate';
+import { SendMessagesTemplate } from '@/components';
 import SelectTemplateMessages from '@/components/whatsapp/SelectTemplateMessages';
 
 
