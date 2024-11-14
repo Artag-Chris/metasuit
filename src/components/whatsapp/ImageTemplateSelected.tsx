@@ -1,9 +1,12 @@
 
 import React, { useEffect, useState } from "react";
-import { ImageTemplateReceived } from "../interfaces";
-import { getVariableCount, sendTemplate } from "../../lib";
+
 import { Upload, Send,  Phone } from "lucide-react";
-import { cuatroVariableImagen, dosVariableImagen, sinVariableImagen, tresVariableImagen, unaVariableImagen } from "../config/envs";
+
+import { getVariableCount, sendTemplate,ImageTemplateReceived,
+    cuatroVariableImagen, dosVariableImagen, sinVariableImagen,
+    tresVariableImagen, unaVariableImagen   } from "../../lib";
+
 
 const ImageTemplateSelected: React.FC<ImageTemplateReceived> = ({
   selectedTemplate,
@@ -41,7 +44,7 @@ const ImageTemplateSelected: React.FC<ImageTemplateReceived> = ({
             console.error("Error: La URL de la imagen no puede estar vacía");
             return;
           }        
-        sendTemplate(sinVariableImagen, payload);
+        sendTemplate(sinVariableImagen!, payload);
         
         break;
       case 1:
@@ -53,7 +56,7 @@ const ImageTemplateSelected: React.FC<ImageTemplateReceived> = ({
             ...payload,
             texto: `${variableValues.variable1}`,
           };
-        sendTemplate(unaVariableImagen, payload);
+        sendTemplate(unaVariableImagen!, payload);
           
         break;
       case 2:
@@ -62,7 +65,7 @@ const ImageTemplateSelected: React.FC<ImageTemplateReceived> = ({
             texto: `${variableValues.variable1}`,
             texto2: `${variableValues.variable2}`,
           };
-        sendTemplate(dosVariableImagen, payload);
+        sendTemplate(dosVariableImagen!, payload);
         break;
       case 3:
         payload = {
@@ -71,7 +74,7 @@ const ImageTemplateSelected: React.FC<ImageTemplateReceived> = ({
             texto2: `${variableValues.variable2}`,
             texto3: `${variableValues.variable3}`,
           };
-        sendTemplate(tresVariableImagen, payload);
+        sendTemplate(tresVariableImagen!, payload);
         break;
       case 4:
         payload = {
@@ -81,7 +84,7 @@ const ImageTemplateSelected: React.FC<ImageTemplateReceived> = ({
             texto3: `${variableValues.variable3}`,
             texto4: `${variableValues.variable4}`,
           };
-        sendTemplate(cuatroVariableImagen, payload);
+        sendTemplate(cuatroVariableImagen!, payload);
         break;
       default:
         // Código para manejar otros tipos de componentes

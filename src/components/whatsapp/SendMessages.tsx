@@ -1,5 +1,5 @@
 
-import ImageTemplateSeleted from './ImageTemplateSeleted';
+import ImageTemplateSeleted from './ImageTemplateSelected';
 import BodyTemplateSelected from './BodyTemplateSelected';
 import ExcelPreview from '../excelcomponents/ExcelPreviewComponent';
 import VideoTemplateSelected from './VideoTemplateSelected';
