@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mic, Paperclip, Send, UserCheck, X } from "lucide-react";
 import useSpecificData from "../../hooks/useSpecificUserData";
-import { format } from "date-fns/format";
+import { format } from "date-fns/format"; //usar un adaptador aqui para esto
 import { DocumentMessage,ImageMessage,VideoMessage, VoiceMessage } from "..";
 
 import { removeBase64Prefix,ChatMessages,Conversation,User, WhatsappMessage, WhatsappStatus,botNumber,
   dispatchUser, documentResponse, fileMediaMeta, frontDocument, frontImage, frontMessage, frontVideo,
   imageResponse, metaToken, textResponse, urlBase, videoResponse  } from "@/lib";
 
-
-
-
+//usar adecuadamente esta interface
 interface Props {
   user: any;
 }
 
 export default function ChatWhatsappComponent({ user }: Props) {
+  //revisar esto para ver que se usan o no
+
   const [messages, setMessages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [inputText, setInputText] = useState("");
