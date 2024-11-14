@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { FetchDatafromAPIClass } from '@/app/domain/interfaces/fectUserData';
-import { apiUser } from '@/app/domain/config/envs';
+import { apiUser } from '@/lib';
 
 export const useWhatsappData = () => {
   const [data, setData] = useState<any[]>([]);
@@ -13,7 +13,7 @@ export const useWhatsappData = () => {
    
     
     try {
-      const response = await axios.get<FetchDatafromAPIClass[]>(`http://201.236.243.161:4000/api/prisma/users`);
+      const response = await axios.get<FetchDatafromAPIClass[]>(apiUser!);
      //console.log(response.data);
       setData(response.data);
       setLoading(false);

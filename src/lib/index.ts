@@ -8,3 +8,4 @@ export * from "./config/envs";
 
 export * from "./interfaces/ImageTemplateReceived"
 export * from "./interfaces/BodyTemplateReceived"
+export * from "./interfaces/ChatUserWhatsapp"

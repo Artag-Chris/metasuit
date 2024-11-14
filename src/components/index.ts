@@ -2,6 +2,7 @@
 export * from "../components/whatsapp/WhatsappMessageComponent";
 export * from "../components/whatsapp/SelectTemplateMessages";
 export * from "../components/whatsapp/SendMessages";
+export * from "../components/whatsapp/ChatWhatsappComponent"
 
 
 //ui Chadcn

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { MessageCircle, RefreshCw } from "lucide-react";
-import { User } from "@/app/domain/interfaces/userInterface";
+import { User } from "@/lib/interfaces/userInterface";
 import { numberParser } from "@/lib";
 import { useWhatsappData } from "@/hooks/useWhatsappData";
 import { useThemeStore } from '@/store/ui/ThemeConfiguration';
