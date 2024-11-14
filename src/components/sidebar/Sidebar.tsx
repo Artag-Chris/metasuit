@@ -113,7 +113,7 @@ const data = {
         },
         {
           title: "Plantillas de Whatsapp",
-          url: "#",
+          url: "http://localhost:3000/whatsapp/templates",
         },
         {
           title: "Chats de instagram",

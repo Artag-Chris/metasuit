@@ -2,11 +2,9 @@
 
 import React, { useEffect } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button ,Input,Label } from "@/components"
 import { signIn, signOut, useSession } from "next-auth/react"
-import { useThemeStore } from '@/store/ui/ThemeConfiguration'
+import { useThemeStore } from '@/store'
 
 export default function LoginPage() {
   const { data: session } = useSession()

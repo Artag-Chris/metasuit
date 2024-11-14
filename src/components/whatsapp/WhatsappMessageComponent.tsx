@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { MessageCircle, RefreshCw } from "lucide-react";
 import { User } from "@/app/domain/interfaces/userInterface";
-import { numberParser } from "@/app/domain/functions/numberParser";
+import { numberParser } from "@/lib";
 import { useWhatsappData } from "@/hooks/useWhatsappData";
 import { useThemeStore } from '@/store/ui/ThemeConfiguration';
 
