@@ -36,7 +36,7 @@ interface VersionedThemeState extends ThemeState {
   checkAndUpdateVersion: () => void;
 }
 
-const CURRENT_VERSION = 1; // Increment this when you make changes to the themes
+const CURRENT_VERSION = 2; // Increment this when you make changes to the themes
 
 const defaultTheme: Theme = {
   id: 'default',

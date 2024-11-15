@@ -1,8 +1,9 @@
 "use client";
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { SendMessagesTemplate } from '@/components';
 import SelectTemplateMessages from '@/components/whatsapp/SelectTemplateMessages';
-
+import { useThemeStore } from '@/store/ui/ThemeConfiguration';
 
 export default function TemplatesPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
@@ -12,38 +13,97 @@ export default function TemplatesPage() {
   const [documentUrl, setDocumentUrl] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
 
+  const { themes, currentThemeId, checkAndUpdateVersion } = useThemeStore();
+  const currentTheme = themes.find(theme => theme.id === currentThemeId) || themes[0];
+
+  useEffect(() => {
+    checkAndUpdateVersion();
+  }, [checkAndUpdateVersion]);
+
+  const containerStyle: React.CSSProperties = {
+    minHeight: '100vh',
+    width: '100%',
+    backgroundColor: currentTheme.background,
+    color: currentTheme.text,
+    fontFamily: currentTheme.fontFamily,
+    fontSize: `${currentTheme.fontSize.medium}px`,
+    display: 'flex',
+  };
+
+  const columnStyle: React.CSSProperties = {
+    flex: 1,
+    padding: `${currentTheme.spacing.large}px`,
+    display: 'flex',
+    flexDirection: 'column',
+  };
+
+  const cardStyle: React.CSSProperties = {
+    backgroundColor: currentTheme.background,
+    borderRadius: `${currentTheme.borderRadius}px`,
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    padding: `${currentTheme.spacing.large}px`,
+    flex: 1,
+  };
+
+  const headingStyle: React.CSSProperties = {
+    fontSize: `${currentTheme.fontSize.large}px`,
+    fontWeight: 'bold',
+    color: currentTheme.primary,
+    marginBottom: `${currentTheme.spacing.medium}px`,
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    backgroundColor: currentTheme.primary,
+    color: currentTheme.background,
+    padding: `${currentTheme.spacing.small}px ${currentTheme.spacing.medium}px`,
+    borderRadius: `${currentTheme.borderRadius}px`,
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: `${currentTheme.fontSize.medium}px`,
+    fontWeight: 'bold',
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="w-full lg:w-1/3">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <SelectTemplateMessages 
-              setIsExcelFileLoaded={setIsExcelFileLoaded}
-              setSelectedTemplate={setSelectedTemplate} 
+    <div style={containerStyle}>
+      <div style={columnStyle}>
+        <div style={cardStyle}>
+          <h2 style={headingStyle}>Envío de Plantilla</h2>
+          <SelectTemplateMessages 
+            setIsExcelFileLoaded={setIsExcelFileLoaded}
+            setSelectedTemplate={setSelectedTemplate} 
+            selectedTemplate={selectedTemplate} 
+            setMessages={setMessages}
+            messages={messages}
+            imageUrl={imageUrl}
+            documentUrl={documentUrl}
+            videoUrl={videoUrl}
+          />
+        </div>
+      </div>
+      <div style={columnStyle}>
+        {selectedTemplate ? (
+          <div style={cardStyle}>
+            <h2 style={headingStyle}>Plantilla de Texto</h2>
+            <SendMessagesTemplate 
               selectedTemplate={selectedTemplate} 
-              setMessages={setMessages}
-              messages={messages}
+              isExcelFileLoaded={isExcelFileLoaded} 
+              setImageUrl={setImageUrl} 
+              messages={messages}  
               imageUrl={imageUrl}
+              setDocumentUrl={setDocumentUrl} 
               documentUrl={documentUrl}
+              setVideoUrl={setVideoUrl} 
               videoUrl={videoUrl}
             />
+            
           </div>
-        </div>
-        <div className="w-full lg:w-2/3">
-          {selectedTemplate ? (
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <SendMessagesTemplate selectedTemplate={selectedTemplate} isExcelFileLoaded={isExcelFileLoaded} 
-               setImageUrl={setImageUrl} messages={messages}  imageUrl={imageUrl}
-               setDocumentUrl={setDocumentUrl} documentUrl={documentUrl}
-               setVideoUrl={setVideoUrl} videoUrl={videoUrl}
-              />
-            </div>
-          ) : (
-            <div className="bg-white rounded-lg shadow-lg p-6 flex items-center justify-center h-full">
-              <p className="text-gray-500 text-lg">Selecciona una plantilla para previsualizar</p>
-            </div>
-          )}
-        </div>
+        ) : (
+          <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <p style={{ color: currentTheme.text, fontSize: `${currentTheme.fontSize.large}px` }}>
+              Selecciona una plantilla para previsualizar
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
