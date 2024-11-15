@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SendMessagesTemplate } from '@/components';
 import SelectTemplateMessages from '@/components/whatsapp/SelectTemplateMessages';
 import { useThemeStore } from '@/store/ui/ThemeConfiguration';
@@ -28,10 +29,10 @@ export default function TemplatesPage() {
     fontFamily: currentTheme.fontFamily,
     fontSize: `${currentTheme.fontSize.medium}px`,
     display: 'flex',
+    flexDirection: 'column',
   };
 
   const columnStyle: React.CSSProperties = {
-    flex: 1,
     padding: `${currentTheme.spacing.large}px`,
     display: 'flex',
     flexDirection: 'column',
@@ -42,7 +43,7 @@ export default function TemplatesPage() {
     borderRadius: `${currentTheme.borderRadius}px`,
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     padding: `${currentTheme.spacing.large}px`,
-    flex: 1,
+    marginBottom: `${currentTheme.spacing.large}px`,
   };
 
   const headingStyle: React.CSSProperties = {
@@ -50,17 +51,6 @@ export default function TemplatesPage() {
     fontWeight: 'bold',
     color: currentTheme.primary,
     marginBottom: `${currentTheme.spacing.medium}px`,
-  };
-
-  const buttonStyle: React.CSSProperties = {
-    backgroundColor: currentTheme.primary,
-    color: currentTheme.background,
-    padding: `${currentTheme.spacing.small}px ${currentTheme.spacing.medium}px`,
-    borderRadius: `${currentTheme.borderRadius}px`,
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: `${currentTheme.fontSize.medium}px`,
-    fontWeight: 'bold',
   };
 
   return (
@@ -80,31 +70,56 @@ export default function TemplatesPage() {
           />
         </div>
       </div>
-      <div style={columnStyle}>
+      <AnimatePresence>
         {selectedTemplate ? (
-          <div style={cardStyle}>
-            <h2 style={headingStyle}>Plantilla de Texto</h2>
-            <SendMessagesTemplate 
-              selectedTemplate={selectedTemplate} 
-              isExcelFileLoaded={isExcelFileLoaded} 
-              setImageUrl={setImageUrl} 
-              messages={messages}  
-              imageUrl={imageUrl}
-              setDocumentUrl={setDocumentUrl} 
-              documentUrl={documentUrl}
-              setVideoUrl={setVideoUrl} 
-              videoUrl={videoUrl}
-            />
-            
-          </div>
+          <motion.div
+            key="template-preview"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            style={columnStyle}
+          >
+            <div style={cardStyle}>
+              <h2 style={headingStyle}>Plantilla de Texto</h2>
+              <SendMessagesTemplate 
+                selectedTemplate={selectedTemplate} 
+                isExcelFileLoaded={isExcelFileLoaded} 
+                setImageUrl={setImageUrl} 
+                messages={messages}  
+                imageUrl={imageUrl}
+                setDocumentUrl={setDocumentUrl} 
+                documentUrl={documentUrl}
+                setVideoUrl={setVideoUrl} 
+                videoUrl={videoUrl}
+              />
+            </div>
+          </motion.div>
         ) : (
-          <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <motion.div
+            key="template-placeholder"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ ...cardStyle, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
             <p style={{ color: currentTheme.text, fontSize: `${currentTheme.fontSize.large}px` }}>
               Selecciona una plantilla para previsualizar
             </p>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
+      <style jsx>{`
+        @media (min-width: 768px) {
+          div[style] {
+            flex-direction: row !important;
+          }
+          div[style] > div {
+            flex: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 }
