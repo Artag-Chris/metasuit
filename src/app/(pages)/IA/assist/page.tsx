@@ -144,7 +144,7 @@ export default function VirtualAssistant() {
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl" style={{ fontFamily: currentTheme.fontFamily }}>
+    <div className="container mx-auto p-4 max-w-4xl" style={{ fontFamily: currentTheme.fontFamily, width: '100%', height: '100%', backgroundColor: 'white' }}>
       <h1 className="text-2xl font-bold mb-4" style={{ color: currentTheme.primary }}>
         Virtual Assistant Interface
       </h1>
@@ -215,11 +215,7 @@ export default function VirtualAssistant() {
         </TabsList>
         <TabsContent value="chat">
           <div className="flex h-[600px]">
-            <div className="w-1/4 pr-4 border-r" 
-            /*
-            style={{ borderColor: currentTheme.border }}
-            */
-            >
+            <div className="w-1/4 pr-4 border-r" style={{ borderColor: currentTheme.primary }}>
               <Button onClick={addConversation} className="w-full mb-2">
                 <Plus className="mr-2 h-4 w-4" /> New Chat
               </Button>
@@ -257,12 +253,7 @@ export default function VirtualAssistant() {
               </ScrollArea>
             </div>
             <div className="w-3/4 pl-4 flex flex-col">
-              <ScrollArea className="flex-grow mb-4 p-4 border rounded" 
-              /*
-              style={{ borderColor: currentTheme.border }
-              
-              } */ 
-              >
+              <ScrollArea className="flex-grow mb-4 p-4 border rounded" style={{ borderColor: currentTheme.primary }}>
                 <AnimatePresence>
                   {currentConversationId &&
                     conversations
