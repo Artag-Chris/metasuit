@@ -2,18 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { Upload, Send } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { Textarea } from '@/components/ui/textarea'
 import { useThemeStore } from '@/store/ui/ThemeConfiguration'
+import { Button,Input,Label,Dialog,
+  DialogContent,DialogDescription,DialogHeader,
+  DialogTitle, Textarea } from '@/components'
 
 // Placeholder function for AI interaction
 async function analyzeImage(image: File, question: string): Promise<string> {
