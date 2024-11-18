@@ -25,7 +25,6 @@ import {
   SquareTerminal,
   Trash2,
 } from "lucide-react"
-
 import {
   Avatar,
   AvatarFallback,

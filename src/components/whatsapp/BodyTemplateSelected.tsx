@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { Send, Phone } from "lucide-react";
-
-import { getVariableCount, sendTemplate,BodyTemplateReceived,cuatroVariable,
-     dosVariable, sinVariable, tresVariable, unaVariable } from "../../lib";
+import { getVariableCount, sendTemplate,
+  BodyTemplateReceived,cuatroVariable,
+  dosVariable, sinVariable, tresVariable,
+  unaVariable } from "../../lib";
 
 
 

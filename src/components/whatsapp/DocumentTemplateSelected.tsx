@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Upload, Send, Phone } from "lucide-react";
-
 import { getVariableCount, sendTemplate,cuatroVariableDocument,
   dosVariableDocument, sinVariableDocument,
   tresVariableDocument, unaVariableDocument } from "../../lib";
