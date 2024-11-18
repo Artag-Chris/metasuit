@@ -6,7 +6,8 @@ import { DocumentMessage,ImageMessage,VideoMessage, VoiceMessage } from "..";
 
 import { removeBase64Prefix,ChatMessages,Conversation,User, WhatsappMessage, WhatsappStatus,botNumber,
   dispatchUser, documentResponse, fileMediaMeta, frontDocument, frontImage, frontMessage, frontVideo,
-  imageResponse, metaToken, textResponse, urlBase, videoResponse  } from "@/lib";
+  imageResponse, metaToken, textResponse, urlBase,
+  videoResponse  } from "@/lib";
 
 //usar adecuadamente esta interface
 interface Props {

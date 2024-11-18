@@ -3,7 +3,6 @@ import ImageTemplateSeleted from './ImageTemplateSelected';
 import BodyTemplateSelected from './BodyTemplateSelected';
 import ExcelPreview from '../excel/ExcelPreviewComponent';
 import VideoTemplateSelected from './VideoTemplateSelected';
-
 import DocumentTemplateSelected from './DocumentTemplateSelected';
 
 type SendMessagesTemplateProps = {
