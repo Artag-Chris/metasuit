@@ -477,7 +477,7 @@ export default function Page({
       </Sidebar>
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12" style={{
-          backgroundColor: currentTheme.background,
+          //backgroundColor: currentTheme.background,
           color: currentTheme.text,
         }}>
           <div className="flex items-center gap-2 px-4">
@@ -499,7 +499,7 @@ export default function Page({
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0" style={{
-          backgroundColor: currentTheme.background,
+         // backgroundColor: currentTheme.background,
           color: currentTheme.text,
         }}>
           {children}
