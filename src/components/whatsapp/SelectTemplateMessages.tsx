@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Loader2, Send, FileSpreadsheet, ChevronDown, Search, X } from "lucide-react";
 import * as XLSX from "xlsx"; //usar un adaptador aqui para esto
-
+import { getVariableCount } from "../../lib";
 import usePhoneNumbers from "../../hooks/usePhoneNumberToSend";
 import useTemplates from "../../hooks/useTemplates";
-
-import { getVariableCount } from "../../lib";
-
 import { sinVariableImagen, unaVariableImagen, dosVariableImagen, tresVariableImagen,
-    cuatroVariableImagen, sinVariable, unaVariable, dosVariable, tresVariable, cuatroVariable,
-    sinVariableDocument, cuatroVariableDocument, dosVariableDocument, tresVariableDocument,
-    unaVariableDocument, cuatroVariableVideo, dosVariableVideo, sinVariableVideo, tresVariableVideo, 
-    unaVariableVideo } from "../../lib/config/envs";
-
+  cuatroVariableImagen, sinVariable, unaVariable, dosVariable, tresVariable, cuatroVariable,
+  sinVariableDocument, cuatroVariableDocument, dosVariableDocument, tresVariableDocument,
+  unaVariableDocument, cuatroVariableVideo, dosVariableVideo, sinVariableVideo, tresVariableVideo, 
+  unaVariableVideo } from "../../lib/config/envs";
 
 interface SendMessagesProps {
   setSelectedTemplate: (template: any) => void;

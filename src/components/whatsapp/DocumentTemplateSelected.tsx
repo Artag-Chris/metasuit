@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-
-import { getVariableCount, sendTemplate,cuatroVariableDocument, dosVariableDocument, sinVariableDocument, tresVariableDocument, unaVariableDocument } from "../../lib";
 import { Upload, Send, Phone } from "lucide-react";
+
+import { getVariableCount, sendTemplate,cuatroVariableDocument,
+  dosVariableDocument, sinVariableDocument,
+  tresVariableDocument, unaVariableDocument } from "../../lib";
 
 
 const DocumentTemplateSelected: React.FC<any> = ({
