@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { motion } from "framer-motion"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -34,6 +35,26 @@ type SidebarContext = {
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
+}
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.3, // Stagger children by .3 seconds
+    },
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: "afterChildren",
+    },
+  },
+}
+
+const item = {
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: -200 },
 }
 
 const SidebarContext = React.createContext<SidebarContext | null>(null)
@@ -248,6 +269,7 @@ const Sidebar = React.forwardRef<
           {...props}
         >
           <div
+          
             data-sidebar="sidebar"
             className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
           >
@@ -294,6 +316,7 @@ const SidebarRail = React.forwardRef<
 
   return (
     <button
+  
       ref={ref}
       data-sidebar="rail"
       aria-label="Toggle Sidebar"
@@ -357,6 +380,7 @@ const SidebarHeader = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <div
+
       ref={ref}
       data-sidebar="header"
       className={cn("flex flex-col gap-2 p-2", className)}
@@ -490,7 +514,13 @@ const SidebarMenu = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<"ul">
 >(({ className, ...props }, ref) => (
-  <ul
+  <motion.ul
+  //initial="hidden"
+  initial={{ transform: "translateX(-100px)" }}
+  animate={{ transform: "translateX(0px)" }}
+  transition={{ type: "spring" }}
+  whileInView="visible"
+  variants={list}
     ref={ref}
     data-sidebar="menu"
     className={cn("flex w-full min-w-0 flex-col gap-1", className)}
@@ -503,7 +533,12 @@ const SidebarMenuItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, ...props }, ref) => (
-  <li
+  <motion.li
+  variants={item}
+  initial={{ opacity: 0 }}
+  whileHover={{ backgroundColor: "rgba(220, 220, 220, 1)" }}
+  whileTap={{ backgroundColor: "rgba(255, 255, 255, 1)" }}
+  whileInView={{ opacity: 1 }}
     ref={ref}
     data-sidebar="menu-item"
     className={cn("group/menu-item relative", className)}
@@ -687,7 +722,11 @@ const SidebarMenuSub = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<"ul">
 >(({ className, ...props }, ref) => (
-  <ul
+  <motion.ul
+  initial={{ transform: "translatex(-100px)" }}
+  animate={{ transform: "translateX(0px)" }}
+  transition={{ type:"spring" }}
+  whileInView="visible"
     ref={ref}
     data-sidebar="menu-sub"
     className={cn(

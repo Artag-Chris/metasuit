@@ -199,6 +199,8 @@ const data = {
   ],
 }
 
+
+
 export default function Page({
     children,
 }: {
@@ -292,7 +294,7 @@ export default function Page({
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>Principal</SidebarGroupLabel>
             <SidebarMenu>
               {data.navMain.map((item) => (
                 <Collapsible
